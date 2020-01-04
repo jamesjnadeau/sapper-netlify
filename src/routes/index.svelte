@@ -34,7 +34,6 @@
 
 <svelte:head>
 	<title>Sapper project template</title>
-	<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </svelte:head>
 
 <h1>Great success!</h1>
@@ -49,12 +48,13 @@
 <script>
   // redirect to netlify cms
   import { onMount } from 'svelte';
+	const netlifyIdentity = require('netlify-identity-widget');
 
   onMount(() => {
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
+    if (netlifyIdentity) {
+      netlifyIdentity.on("init", user => {
         if (!user) {
-          window.netlifyIdentity.on("login", () => {
+          netlifyIdentity.on("login", () => {
             document.location.href = "/admin/";
           });
         }
